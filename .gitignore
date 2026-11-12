@@ -1,0 +1,15 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+TestResults/
+
+# Node
+node_modules/
+
+# PokeAPI response cache (development only, never committed)
+tools/import/.cache/
+
+# Local environment
+.env

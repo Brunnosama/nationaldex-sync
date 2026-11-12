@@ -1,0 +1,60 @@
+# Runs on every pull request (and on main after a merge). A Pokémon data snapshot reaches users
+# only after these checks pass: see docs/DATA-LIFECYCLE.md.
+name: PR checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  import-unit-tests:
+    name: Import unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - name: Run unit tests
+        run: >
+          dotnet test tools/import/Import.slnx
+          --logger "trx;LogFileName=import-unit-tests.trx"
+          --results-directory test-results
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: import-unit-test-results
+          path: test-results/
+
+  snapshot-validation:
+    name: Snapshot validation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tests
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: tests/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run format:check
+      - name: Validate snapshots
+        run: npm run test:data -- --reporter=default --reporter=junit --outputFile.junit=../test-results/snapshot-validation.xml
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: snapshot-validation-results
+          path: test-results/

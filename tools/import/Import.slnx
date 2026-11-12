@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PokedexSync.Import/PokedexSync.Import.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PokedexSync.Import.Tests/PokedexSync.Import.Tests.csproj" />
+  </Folder>
+</Solution>
