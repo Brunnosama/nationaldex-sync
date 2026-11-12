@@ -1,0 +1,11 @@
+[
+{"id":"kanto","displayName":"Kanto","generation":1},
+{"id":"johto","displayName":"Johto","generation":2},
+{"id":"hoenn","displayName":"Hoenn","generation":3},
+{"id":"sinnoh","displayName":"Sinnoh","generation":4},
+{"id":"unova","displayName":"Unova","generation":5},
+{"id":"kalos","displayName":"Kalos","generation":6},
+{"id":"alola","displayName":"Alola","generation":7},
+{"id":"galar","displayName":"Galar","generation":8},
+{"id":"paldea","displayName":"Paldea","generation":9}
+]
