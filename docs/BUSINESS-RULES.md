@@ -30,7 +30,7 @@ For each entry × game, the app shows what PokeAPI reports:
 | Rate | Encounter chance in % |
 | Evolves from | Evolution chain, with trigger (level 16, Fire Stone, trade) |
 
-- **PokeAPI is the only source.** If PokeAPI doesn't list an entry for a game, that entry is not shown as part of that game. Nothing is added to fill gaps, and no "missing data" message is shown.
+- **PokeAPI is the only source.** An entry is shown as part of a game when PokeAPI lists it for that game.
 - Every game in PokeAPI's version list is included.
 - Version exclusives are flagged (FireRed vs LeafGreen).
 

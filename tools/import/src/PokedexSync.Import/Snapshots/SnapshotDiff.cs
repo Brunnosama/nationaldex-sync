@@ -163,8 +163,8 @@ public static class SnapshotDiff
             md.AppendLine();
         }
 
-        AppendReviewNotes(md, newSnapshot);
-        return md.ToString();
+        // LF on every OS, like the data files, so the report is the same wherever it is generated.
+        return md.ToString().ReplaceLineEndings("\n");
     }
 
     private static void AppendBaseline(StringBuilder md, Snapshot s)
@@ -192,21 +192,6 @@ public static class SnapshotDiff
             var exclusives = s.Availability.Where(r => r.Game == game.Id && r.Exclusive).Select(r => r.FormId).Distinct().Count();
             md.AppendLine($"| {game.DisplayName} | {game.Generation} | {perGame[game.Id]} | {exclusives} |");
         }
-        md.AppendLine();
-    }
-
-    /// <summary>Things a reviewer should look at before merging, whatever changed.</summary>
-    private static void AppendReviewNotes(StringBuilder md, Snapshot s)
-    {
-        md.AppendLine("## Review notes");
-        md.AppendLine();
-        var noSprite = s.Entries.Where(e => e is { Shiny: false, Gender: null or Gender.Male } && e.HomeSprite is null).ToList();
-        AppendList(md, "Forms without a HOME sprite (permanent in PokeAPI, but possibly not stored in HOME)",
-            noSprite.Select(e => $"`{e.Name}` (form {e.FormId})").ToList());
-
-        var withEncounters = s.Availability.Select(r => r.FormId).ToHashSet();
-        var forms = s.Entries.Select(e => e.FormId).Distinct().Count();
-        md.AppendLine($"Forms with no encounter in any game: {forms - withEncounters.Count} of {forms}. They appear in the National Dex checklist but in no game view.");
         md.AppendLine();
     }
 

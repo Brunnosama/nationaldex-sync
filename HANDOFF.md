@@ -54,7 +54,7 @@ For each entry × game, the app shows what PokeAPI reports:
 | Rate | Encounter chance in % |
 | Evolves from | Evolution chain, with trigger (level 16, Fire Stone, trade) |
 
-- **PokeAPI is the only source.** If PokeAPI doesn't list an entry for a game, that entry is not shown as part of that game. Nothing is added to fill gaps, and no "missing data" message is shown.
+- **PokeAPI is the only source.** An entry is shown as part of a game when PokeAPI lists it for that game.
 - Every game in PokeAPI's version list is included.
 - Version exclusives are flagged (FireRed vs LeafGreen).
 
@@ -176,7 +176,6 @@ Angular PWA ──(RxDB replication over GraphQL + WebSocket)──► .NET API 
   /k8s            Kind cluster config and manifests
 /tests
   /e2e            Playwright + TypeScript, Gherkin features (playwright-bdd)
-  /cypress        small smoke suite
   /api            Bruno collection (CRUD, validation, permissions, rate limit)
   /perf           k6 scripts (load, stress, spike, soak)
   /data           snapshot validation tests
@@ -232,7 +231,6 @@ README.md
 - Scenarios: first sync, data version update, mark and unmark, optional details, "game obtained in" limits by generation, Deoxys rule, counters, per-game views, offline edits then sync, two-device conflicts, multi-tab, storage limits, browser suspension, export/import.
 - Each test starts from `/test/reset`; no shared data between specs.
 - Locator rules documented; no forced clicks or DOM scripting.
-- Small Cypress smoke suite for the core path.
 - GitHub Actions: on PR and nightly; Allure report on GitHub Pages; pass rate and retries tracked across runs (flakiness report).
 - **Done when:** nightly runs publish a report with a pass-rate trend.
 
@@ -269,7 +267,7 @@ README.md
 ## 10. Test strategy (summary for TEST-STRATEGY.md)
 
 - All tests run in development and CI. Production is monitored, not tested.
-- Pyramid: unit tests in app and API, snapshot validation tests, Bruno for API, a nightly PokeAPI contract test, Playwright for E2E, a few Cypress smoke tests.
+- Pyramid: unit tests in app and API, snapshot validation tests, Bruno for API, a nightly PokeAPI contract test, Playwright for E2E.
 - Risk-based priority: sync and conflicts first, then data isolation between users, then entry building (forms, gender and shiny variants, Deoxys), then data version updates, then offline behaviour.
 - Scenario design: list the business variables (form, gender, shiny, game, online/offline, device count, data version, signed in or not), build the full matrix, then reduce with pairwise selection (PICT). Keep both in `/docs`.
 - Test data: seed builder output, reset before every test, verified with SQL checks.

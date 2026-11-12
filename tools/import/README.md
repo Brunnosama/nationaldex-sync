@@ -32,6 +32,6 @@ dotnet test tools/import/Import.slnx --filter "FullyQualifiedName~SnapshotBuilde
 3. **Format check**: each response is deserialized into records whose fields are all `required`. If PokeAPI renames, removes or retypes a field the import uses, it stops with exit code 2 and names the resource.
 4. **Build** (`Snapshots/SnapshotBuilder.cs`): pure function from raw data to snapshot. Rules and their reasons are in [ADR 0002](../../docs/adr/0002-dex-entry-model.md).
 5. **Write** (`Snapshots/SnapshotStore.cs`): JSON arrays with one record per line, so git diffs stay readable, plus `manifest.json` with counts and a SHA-256 for each file.
-6. **Diff report** (`Snapshots/SnapshotDiff.cs`): entries added, removed and changed, availability changed per form and game, and review notes. Saved as `DIFF.md` next to the snapshot and pasted into the pull request.
+6. **Diff report** (`Snapshots/SnapshotDiff.cs`): entries added, removed and changed, and availability changed per form and game. Saved as `DIFF.md` next to the snapshot and pasted into the pull request.
 
 Exit codes: `0` success, `1` error (network, wrong branch, bad arguments), `2` PokeAPI format changed.
