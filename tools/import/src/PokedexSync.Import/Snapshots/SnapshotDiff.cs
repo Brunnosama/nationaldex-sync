@@ -164,7 +164,8 @@ public static class SnapshotDiff
         }
 
         AppendReviewNotes(md, newSnapshot);
-        return md.ToString();
+        // LF on every OS, like the data files, so the report is the same wherever it is generated.
+        return md.ToString().ReplaceLineEndings("\n");
     }
 
     private static void AppendBaseline(StringBuilder md, Snapshot s)

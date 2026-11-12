@@ -22,7 +22,7 @@ public static partial class SnapshotStore
         Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
     };
 
-    private static readonly JsonSerializerOptions IndentedOptions = new(JsonOptions) { WriteIndented = true };
+    private static readonly JsonSerializerOptions IndentedOptions = new(JsonOptions) { WriteIndented = true, NewLine = "\n" };
     private static readonly UTF8Encoding Utf8NoBom = new(false);
 
     [GeneratedRegex(@"^v(\d+)$")]
