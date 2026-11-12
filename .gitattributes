@@ -1,0 +1,3 @@
+# LF everywhere so snapshot file hashes in manifest.json match on every OS.
+* text=auto eol=lf
+*.png binary
