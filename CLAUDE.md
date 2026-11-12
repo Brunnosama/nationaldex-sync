@@ -49,7 +49,7 @@ A QA portfolio project: an offline-first Angular PWA that tracks a National Pok�
 - Containers run on **Podman only** (`podman compose`; on Windows via the Podman WSL machine). Never Docker. Kind uses `KIND_EXPERIMENTAL_PROVIDER=podman`.
 - **PokeAPI is called only by the manual import command in development** (`tools/import`), with polite request pacing and local caching. Production, the API and the app never call PokeAPI. The nightly contract test in CI is the only other exception.
 - Pokémon data reaches users only through a release: import on its own `data/pokeapi-vN` branch → versioned snapshot in `/data/snapshots/vN` + diff report → PR review + CI → merge → release pipeline loads it into the DB.
-- PokeAPI is the only data source. Do not fill gaps or add "missing data" messages.
+- PokeAPI is the only data source.
 - Nothing is tested in production; production is checked only via logs/traces and read-only SQL (`/ops/queries`).
 - k6 and Bruno rate-limit tests target only this project's API in dev or CI.
 - No secrets in git; test users and keys come from seed files and `.env.example`.

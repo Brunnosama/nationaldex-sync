@@ -50,6 +50,4 @@ The main region of the species' generation (Hisuian species introduced in Gen 8 
 
 ## Consequences
 
-- The gender rule depends on HOME sprite data. If PokeAPI adds a female HOME sprite later, the next import adds the female entries and the diff report shows them as new; the existing ungendered entry (`…-x-…`) would then be removed and its progress kept and flagged. The review notes in `DIFF.md` list forms without a HOME sprite so they can be checked.
-- Forms PokeAPI marks permanent but HOME doesn't store (Cosplay Pikachu, totems) are included until the business rules say otherwise.
-- PokeAPI has no encounters for starters, gifts or evolved-only species in many games. Those entries are in the National Dex checklist but in no game view; that is the "PokeAPI is the only source" rule.
+- The gender rule depends on HOME sprite data. If PokeAPI adds a female HOME sprite later, the next import adds the female entries and the diff report shows them as new; the existing ungendered entry (`…-x-…`) would then be removed and its progress kept and flagged.
